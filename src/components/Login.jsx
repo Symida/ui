@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../api/axiosConfig';
+import axios from '../api/axiosConfig.jsx';
 
-function Register() {
-    const [email, setEmail] = useState('');
+function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -11,30 +10,20 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.error(email);
-            console.error(username);
-            console.error(password);
-
-
-            const response = await axios.post('/register', {email, username, password });
+            // Отправляем данные на сервер
+            const response = await axios.post('/login', { username, password });
             console.log(response.data);
-            navigate('/login');
+            // Перенаправляем на главную страницу после успешной авторизации
+            navigate('/');
         } catch (error) {
-            console.error('Ошибка регистрации:', error);
+            console.error('Ошибка авторизации:', error);
         }
     };
 
     return (
         <div className="form-container">
-            <h2>Register</h2>
+            <h2>Login</h2>
             <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
                 <input
                     type="text"
                     placeholder="Username"
@@ -49,10 +38,10 @@ function Register() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <button type="submit">Register</button>
+                <button type="submit">Login</button>
             </form>
         </div>
     );
 }
 
-export default Register;
+export default Login;
