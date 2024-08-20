@@ -1,0 +1,36 @@
+volumes:
+  accounts_db_data:
+
+services:
+
+  accounts:
+    image: ghcr.io/symida/accounts:latest
+    container_name: accounts
+    ports:
+      - 8080:8080
+    environment:
+      DATABASE_URL: jdbc:postgresql://accounts_db:5432/postgres
+    depends_on:
+      - accounts_db
+
+  accounts_db:
+    image: ghcr.io/symida/postgres:16.4-alpine
+    container_name: accounts_db
+    ports:
+      - 15432:5432
+    volumes:
+      - accounts_db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+  ui:
+    image: ghcr.io/symida/nginx:alpine3.20-slim
+    container_name: ui
+    ports:
+      - 9000:9000
+    volumes:
+      - .nginx/nginx.conf.template:/etc/nginx/templates/nginx.conf.template
+      - ./dist:/usr/share/nginx/html
+    depends_on:
+      - accounts
+    command: [nginx-debug, '-g', 'daemon off;']
