@@ -23,7 +23,7 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
 
-  ui:
+  proxy:
     image: ghcr.io/symida/nginx:alpine3.20-slim
     container_name: ui
     ports:
