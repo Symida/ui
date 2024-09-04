@@ -57,7 +57,11 @@ export const AuthForm: FC<AuthFormProps> = ({
   if (isSigningUp) {
     return (
       <Form {...signUpForm}>
-        <form className="space-y-4" onSubmit={signUpForm.handleSubmit(handleSignUp)} noValidate>
+        <form
+          className="space-y-4"
+          onSubmit={void signUpForm.handleSubmit(handleSignUp)}
+          noValidate
+        >
           <FormField
             name="email"
             control={signUpForm.control}
@@ -144,7 +148,7 @@ export const AuthForm: FC<AuthFormProps> = ({
   if (isLoggingIn) {
     return (
       <Form {...loginForm}>
-        <form className="space-y-4" onSubmit={loginForm.handleSubmit(handleLogin)}>
+        <form className="space-y-4" onSubmit={void loginForm.handleSubmit(handleLogin)}>
           <FormField
             name="username"
             control={loginForm.control}
