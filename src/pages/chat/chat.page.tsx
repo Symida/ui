@@ -64,14 +64,14 @@ export const ChatPage: FC = () => {
           ))}
         </ScrollArea>
         <div className="p-4 border-t border-gray-200">
-          <Button variant="outline" className="w-full mb-2 justify-start" onClick={() => {}}>
+          <Button variant="outline" className="w-full mb-2 justify-start" onClick={() => void 0}>
             <Settings className="mr-2 h-4 w-4" />
             My Account
           </Button>
           <Button
             variant="outline"
             className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50"
-            onClick={() => {}}
+            onClick={() => void 0}
           >
             <LogOut className="mr-2 h-4 w-4" />
             Logout

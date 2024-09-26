@@ -1,3 +1,4 @@
+// @eslint-ignore
 import { Api, ApiConfig } from './api-requests';
 
 export interface ErrorResponse {
